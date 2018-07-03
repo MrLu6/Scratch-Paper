@@ -30,7 +30,7 @@ class ScratchPaperView1: UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in touches {
-            //print("touch move get call")
+           // print("touch move get call")
             let newDrawingContext = DrawContext(context: self.context)
             let newPoint = touch.location(in: self)
             
@@ -43,7 +43,7 @@ class ScratchPaperView1: UIView {
             
             
             lastPoint = newPoint
-            
+            drawContextArray.append(newDrawingContext)
             saveDrawingContext()
             self.setNeedsDisplay()
             
@@ -58,12 +58,15 @@ class ScratchPaperView1: UIView {
         context?.beginPath()
         
         for points in drawContextArray{
+            
             let fromX = CGFloat(points.startX)
             let fromY = CGFloat(points.startY)
             let toX = CGFloat(points.endX)
             let toY = CGFloat(points.endY)
             context?.move(to: CGPoint(x: fromX, y: fromY))
+            print("startPoint:(\(fromX),\(fromY)")
             context?.addLine(to: CGPoint(x: toX, y: toY))
+            print("endPoint:(\(toX),\(toY)")
         }
         context?.setLineCap(.round)
         context?.setStrokeColor(red: 1, green: 0, blue: 0, alpha: 1)
@@ -78,6 +81,7 @@ class ScratchPaperView1: UIView {
         
         do{
             try context.save()
+            //print(context)
         }catch{
             print("Error occurs when saving context\(error)")
         }
