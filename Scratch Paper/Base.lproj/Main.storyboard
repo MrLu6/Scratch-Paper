@@ -18,31 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g42-zJ-v9x">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperView1" customModule="Scratch_Paper" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperTableView" customModule="Scratch_Paper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="jpe-ck-Hog" firstAttribute="leading" secondItem="g42-zJ-v9x" secondAttribute="leading" id="2aB-Gq-VPY"/>
-                                    <constraint firstItem="jpe-ck-Hog" firstAttribute="width" secondItem="g42-zJ-v9x" secondAttribute="width" id="Ka5-rb-cxr"/>
-                                    <constraint firstItem="jpe-ck-Hog" firstAttribute="height" secondItem="g42-zJ-v9x" secondAttribute="height" id="PfW-EE-tme"/>
-                                    <constraint firstItem="jpe-ck-Hog" firstAttribute="top" secondItem="g42-zJ-v9x" secondAttribute="top" id="UHq-ee-T7a"/>
-                                    <constraint firstAttribute="bottom" secondItem="jpe-ck-Hog" secondAttribute="bottom" id="eKp-TN-9zj"/>
-                                    <constraint firstAttribute="trailing" secondItem="jpe-ck-Hog" secondAttribute="trailing" id="hAQ-Ey-oaB"/>
-                                </constraints>
-                            </scrollView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="g42-zJ-v9x" secondAttribute="bottom" id="9si-xm-cpm"/>
-                            <constraint firstItem="g42-zJ-v9x" firstAttribute="top" secondItem="ayM-0H-XQR" secondAttribute="top" id="iUX-Qe-rnU"/>
-                            <constraint firstAttribute="trailing" secondItem="g42-zJ-v9x" secondAttribute="trailing" id="izI-VN-k5A"/>
-                            <constraint firstItem="g42-zJ-v9x" firstAttribute="leading" secondItem="ayM-0H-XQR" secondAttribute="leading" id="jJk-9q-36N"/>
+                            <constraint firstItem="jpe-ck-Hog" firstAttribute="leading" secondItem="kHw-cu-AfY" secondAttribute="leading" id="XkG-Ss-Ch6"/>
+                            <constraint firstItem="jpe-ck-Hog" firstAttribute="top" secondItem="ayM-0H-XQR" secondAttribute="top" id="bRF-HK-UPH"/>
+                            <constraint firstItem="jpe-ck-Hog" firstAttribute="bottom" secondItem="kHw-cu-AfY" secondAttribute="bottom" id="egK-wd-nnA"/>
+                            <constraint firstItem="jpe-ck-Hog" firstAttribute="trailing" secondItem="kHw-cu-AfY" secondAttribute="trailing" id="uBD-0n-Cea"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kHw-cu-AfY"/>
                     </view>
