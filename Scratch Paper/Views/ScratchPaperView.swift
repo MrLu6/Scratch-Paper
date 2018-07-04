@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ScratchPaperView1: UIView {
+class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
     
@@ -52,7 +52,7 @@ class ScratchPaperView1: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        //print("darw get called")
+       
         let context = UIGraphicsGetCurrentContext()
         
         context?.beginPath()
@@ -64,9 +64,8 @@ class ScratchPaperView1: UIView {
             let toX = CGFloat(points.endX)
             let toY = CGFloat(points.endY)
             context?.move(to: CGPoint(x: fromX, y: fromY))
-            print("startPoint:(\(fromX),\(fromY)")
             context?.addLine(to: CGPoint(x: toX, y: toY))
-            print("endPoint:(\(toX),\(toY)")
+            
         }
         context?.setLineCap(.round)
         context?.setStrokeColor(red: 1, green: 0, blue: 0, alpha: 1)

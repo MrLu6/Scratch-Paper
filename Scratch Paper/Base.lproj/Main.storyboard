@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YmL-4e-dk1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sT1-7v-zOt">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperView1" customModule="Scratch_Paper" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperView" customModule="Scratch_Paper" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -32,10 +32,38 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kHw-cu-AfY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="u1K-JM-Th7">
+                        <barButtonItem key="rightBarButtonItem" title="clear" id="5Nz-QI-z7z" userLabel="clear">
+                            <connections>
+                                <action selector="clearButtonPressed:" destination="YmL-4e-dk1" id="GcB-Zn-ayM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="paperView" destination="jpe-ck-Hog" id="NMe-4H-hG0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2S-QA-9kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="825" y="208"/>
+            <point key="canvasLocation" x="1764" y="207.34632683658174"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5p0-GE-d8i">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sT1-7v-zOt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KlH-k4-tTG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YmL-4e-dk1" kind="relationship" relationship="rootViewController" id="qpg-6u-gO1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r7E-ir-FbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="824.79999999999995" y="207.34632683658174"/>
         </scene>
     </scenes>
 </document>
