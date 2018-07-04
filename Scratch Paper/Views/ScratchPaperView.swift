@@ -74,6 +74,7 @@ class ScratchPaperView: UIView {
             context?.setLineWidth(5)
             context?.strokePath()
             
+            
         }
   
         
@@ -87,6 +88,11 @@ class ScratchPaperView: UIView {
         newDrawingContext.colorR = attribute.instance.colorRGB[attribute.instance.colorIndex].0
         newDrawingContext.colorG = attribute.instance.colorRGB[attribute.instance.colorIndex].1
         newDrawingContext.colorB = attribute.instance.colorRGB[attribute.instance.colorIndex].2
+        
+//        print("Index \(attribute.instance.colorIndex)")
+//        print("red \(newDrawingContext.colorR ) \n")
+//        print("green \(newDrawingContext.colorG ) \n")
+//        print("blue \(newDrawingContext.colorB ) \n")
 
     }
         

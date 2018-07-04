@@ -58,14 +58,23 @@
                                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gop-II-pL3" userLabel="Pink">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Pink"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="62G-9r-YlL"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfp-Iz-UIr" userLabel="LGreen">
                                                                 <rect key="frame" x="55" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="LGreen"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="9Af-0B-Z91"/>
+                                                                </connections>
                                                             </button>
-                                                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9R-w6-FvP">
+                                                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9R-w6-FvP">
                                                                 <rect key="frame" x="110" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="LBlue"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="jem-az-lzx"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -75,14 +84,23 @@
                                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8A-sW-4hC" userLabel="Purple">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Purple"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="jKH-U7-pB5"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUJ-7b-HdU" userLabel="Yellow">
                                                                 <rect key="frame" x="55" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Yellow"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="etD-nB-Y5d"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8a-OP-unT" userLabel="Red">
                                                                 <rect key="frame" x="110" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Red"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="jsa-mf-e6u"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -92,14 +110,23 @@
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gn-90-PvB" userLabel="Green">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Green"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="bHy-nO-F17"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOP-FZ-767">
                                                                 <rect key="frame" x="55" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Blue"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="05o-yY-6Uq"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzG-pb-MiZ" userLabel="Orange">
                                                                 <rect key="frame" x="110" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Oran"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="BqT-vj-75b"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -109,14 +136,23 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5v-Jf-jYq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Black"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="o3n-yJ-AqR"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUG-RC-P4l" userLabel="Brown">
                                                                 <rect key="frame" x="55" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Brown"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Ui7-kU-ZD0"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfR-J9-0q5">
                                                                 <rect key="frame" x="110" y="0.0" width="50" height="30"/>
                                                                 <state key="normal" title="Gray"/>
+                                                                <connections>
+                                                                    <action selector="colorButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="gQr-Yv-f0J"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>

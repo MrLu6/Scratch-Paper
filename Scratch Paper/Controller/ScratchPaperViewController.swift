@@ -22,9 +22,12 @@ class ScratchPaperViewController:UIViewController {
         super.viewDidLoad()
         coloBrushOpcityPanel.isHidden = true
         
-        loadDrawingContext()
+        
+        paperView.loadDrawingContext()
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
-        paperView.setNeedsDisplay()// Do any additional setup after loading the view, typically from a nib.\
+        paperView.setNeedsDisplay()
+        // Do any additional setup after loading the view, typically from a nib.\
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,23 +49,6 @@ class ScratchPaperViewController:UIViewController {
         attribute.instance.colorIndex = sender.tag
     
     }
-//
-//    func setContextColor(red: Float = 0, green: Float = 0, blue: Float){
-//
-//        for points in paperView.drawContextArray {
-//
-//            points.colorR = red
-//            points.colorG = green
-//            points.colorB = blue
-//
-//        }
-//
-//
-//    }
-    
-    
-    
-    //self.setNeedsDisplay()
   
   
     @IBAction func clearButtomPressed(_ sender: UIButton) {
@@ -72,25 +58,20 @@ class ScratchPaperViewController:UIViewController {
     }
     
     
-    
-    func loadDrawingContext(){
-        paperView.loadDrawingContext()
-        paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
-        paperView.setNeedsDisplay()
-    }
-    
-    
     func deleteDrawingContext(){
         
-//        paperView.isHidden = true
-        
-        while !paperView.drawContextArray.isEmpty {
-            paperView.drawContextArray.popLast()
+        for drawContext in paperView.drawContextArray{
+            
+            paperView.context.delete(drawContext)
+            
         }
+        
+        paperView.saveDrawingContext()
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
         
     }
+    
     
 
 
