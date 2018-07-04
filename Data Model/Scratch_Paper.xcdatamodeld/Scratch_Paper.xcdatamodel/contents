@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DrawContext" representedClassName="DrawContext" syncable="YES" codeGenerationType="class">
+        <attribute name="colorB" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorG" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="colorR" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="endX" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
         <attribute name="endY" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startX" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startY" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

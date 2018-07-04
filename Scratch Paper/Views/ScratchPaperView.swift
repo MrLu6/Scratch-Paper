@@ -12,8 +12,11 @@ import CoreData
 class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
+   
     
     var lastPoint = CGPoint()
+   
+
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -40,7 +43,7 @@ class ScratchPaperView: UIView {
             newDrawingContext.startY = Float(lastPoint.y)
             newDrawingContext.endX = Float(newPoint.x)
             newDrawingContext.endY = Float(newPoint.y)
-            
+            setContextColor(newDrawingContext: newDrawingContext)
             
             lastPoint = newPoint
             drawContextArray.append(newDrawingContext)
@@ -66,15 +69,28 @@ class ScratchPaperView: UIView {
             context?.move(to: CGPoint(x: fromX, y: fromY))
             context?.addLine(to: CGPoint(x: toX, y: toY))
             
+            context?.setLineCap(.round)
+            context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: 1)
+            context?.setLineWidth(5)
+            context?.strokePath()
+            
         }
-        context?.setLineCap(.round)
-        context?.setStrokeColor(red: 1, green: 0, blue: 0, alpha: 1)
-        context?.setLineWidth(5)
-        context?.strokePath()
+  
         
         
         
     }
+    
+    
+    func setContextColor(newDrawingContext: DrawContext ){
+       // print("setColor get called")
+        newDrawingContext.colorR = attribute.instance.colorRGB[attribute.instance.colorIndex].0
+        newDrawingContext.colorG = attribute.instance.colorRGB[attribute.instance.colorIndex].1
+        newDrawingContext.colorB = attribute.instance.colorRGB[attribute.instance.colorIndex].2
+
+    }
+        
+        
     
     func saveDrawingContext(){
         
