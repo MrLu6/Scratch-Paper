@@ -4,12 +4,14 @@
         <attribute name="colorB" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="colorG" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="colorR" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="endX" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
-        <attribute name="endY" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="startX" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="startY" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
+        <attribute name="mid1X" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
+        <attribute name="mid1Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="mid2X" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="mid2Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
+        <attribute name="previousPoint1X" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="previousPoint1Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

@@ -15,7 +15,10 @@ class ScratchPaperView: UIView {
    
     
     var lastPoint = CGPoint()
-   
+    
+    var previousPoint1: CGPoint?
+    var previousPoint2: CGPoint?
+    var currentPoint: CGPoint?
 
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -24,37 +27,48 @@ class ScratchPaperView: UIView {
         
         
         if let touch = touches.first{
-            lastPoint = touch.location(in: self)
+           previousPoint1 = touch.location(in: self)
+          
         }
         
     }
     
+    
+    //credit kyoji
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        for touch in touches {
-           // print("touch move get call")
-            let newDrawingContext = DrawContext(context: self.context)
-            let newPoint = touch.location(in: self)
-            
-            
-            
-            newDrawingContext.startX = Float(lastPoint.x)
-            newDrawingContext.startY = Float(lastPoint.y)
-            newDrawingContext.endX = Float(newPoint.x)
-            newDrawingContext.endY = Float(newPoint.y)
-            setContextColor(newDrawingContext: newDrawingContext)
-            
-            lastPoint = newPoint
-            drawContextArray.append(newDrawingContext)
-            saveDrawingContext()
-            self.setNeedsDisplay()
-            
-        }
+        guard let touch = touches.first else { return }
         
+        let previousPoint2 = previousPoint1
+        previousPoint1 = touch.previousLocation(in: self)
+        let currentPoint = touch.location(in: self)
+        
+        
+        // calculate mid point
+        let mid1 = midPoint(p1: previousPoint1!, p2: previousPoint2!)
+        let mid2 = midPoint(p1: currentPoint, p2: previousPoint1!)
+        let newDrawingContext = DrawContext(context: self.context)
+        
+        newDrawingContext.mid1X = Float(mid1.x)
+        newDrawingContext.mid1Y = Float(mid1.y)
+        
+        newDrawingContext.mid2X = Float(mid2.x)
+        newDrawingContext.mid2Y = Float(mid2.y)
+        
+        newDrawingContext.previousPoint1X = Float((previousPoint1?.x)!)
+        newDrawingContext.previousPoint1Y = Float((previousPoint1?.y)!)
+        
+        setContextColor(newDrawingContext: newDrawingContext)
+        
+        drawContextArray.append(newDrawingContext)
+        saveDrawingContext()
+        self.setNeedsDisplay()
+
+
     }
     
-    override func draw(_ rect: CGRect) {
+    override func draw( _ rect: CGRect) {
        
         let context = UIGraphicsGetCurrentContext()
         
@@ -62,17 +76,21 @@ class ScratchPaperView: UIView {
         
         for points in drawContextArray{
             
-            let fromX = CGFloat(points.startX)
-            let fromY = CGFloat(points.startY)
-            let toX = CGFloat(points.endX)
-            let toY = CGFloat(points.endY)
-            context?.move(to: CGPoint(x: fromX, y: fromY))
-            context?.addLine(to: CGPoint(x: toX, y: toY))
+            let mid1X = CGFloat(points.mid1X)
+            let mid1Y = CGFloat(points.mid1Y)
+            let mid2X = CGFloat(points.mid2X)
+            let mid2Y = CGFloat(points.mid2Y)
+            let previousPoint1X = CGFloat(points.previousPoint1X)
+            let previousPoint1Y = CGFloat(points.previousPoint1Y)
             
+            
+            context?.move(to: CGPoint(x:mid1X, y: mid1Y))
+            context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
             context?.setLineCap(.round)
             context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: 1)
             context?.setLineWidth(5)
             context?.strokePath()
+            
             
             
         }
@@ -120,6 +138,10 @@ class ScratchPaperView: UIView {
         }
         
         
+    }
+    
+    func midPoint(p1: CGPoint, p2: CGPoint) -> CGPoint {
+        return CGPoint(x: (p1.x + p2.x) / 2.0, y: (p1.y + p2.y) / 2.0)
     }
     
     
