@@ -45,10 +45,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E216650520EE03A300EA4EB2 /* Supporting documents */ = {
+			isa = PBXGroup;
+			children = (
+				E2C7662620E99F5600334629 /* AppDelegate.swift */,
+				E2C7662A20E99F5600334629 /* Main.storyboard */,
+				E2C7663020E99F5700334629 /* Assets.xcassets */,
+				E2C7663220E99F5700334629 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting documents";
+			sourceTree = "<group>";
+		};
 		E2C7661A20E99F5600334629 = {
 			isa = PBXGroup;
 			children = (
-				E2F4089820EC8B0D00C7809C /* Data Model */,
 				E2C7662520E99F5600334629 /* Scratch Paper */,
 				E2C7662420E99F5600334629 /* Products */,
 			);
@@ -65,12 +75,10 @@
 		E2C7662520E99F5600334629 /* Scratch Paper */ = {
 			isa = PBXGroup;
 			children = (
+				E2F4089820EC8B0D00C7809C /* Data Model */,
 				E2C7663C20E9E6C600334629 /* Views */,
 				E2C7663B20E9E69D00334629 /* Controller */,
-				E2C7662620E99F5600334629 /* AppDelegate.swift */,
-				E2C7662A20E99F5600334629 /* Main.storyboard */,
-				E2C7663020E99F5700334629 /* Assets.xcassets */,
-				E2C7663220E99F5700334629 /* LaunchScreen.storyboard */,
+				E216650520EE03A300EA4EB2 /* Supporting documents */,
 				E2C7663520E99F5700334629 /* Info.plist */,
 			);
 			path = "Scratch Paper";
