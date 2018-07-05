@@ -16,7 +16,9 @@ class ScratchPaperViewController:UIViewController {
     
     @IBOutlet weak var toolBarView: UIView!
     
-    @IBOutlet weak var coloBrushOpcityPanel: UIView!
+    
+    
+    @IBOutlet weak var ColorBrushOpcityPanel: UIView!
     
     @IBOutlet weak var BrushLabel: UILabel!
     @IBOutlet weak var OpacityLabel: UILabel!
@@ -30,6 +32,9 @@ class ScratchPaperViewController:UIViewController {
         numBrushChange()
         brushLabelChange()
         
+//        sender addTarget:self action:@selector(sliderReleasedMethod:) forControlEvents:UIControlEventTouchUpInside
+        
+        
     }
     
     @IBAction func OpacitySlider(_ sender: UISlider) {
@@ -38,20 +43,14 @@ class ScratchPaperViewController:UIViewController {
         opacityLableChange()
         
     }
-    
-
         
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        coloBrushOpcityPanel.isHidden = true
+       ColorBrushOpcityPanel.isHidden = true
         
-        paperView.layer.zPosition = 1
-        toolBarView.layer.zPosition = 2
-        coloBrushOpcityPanel.layer.zPosition = 3
-        
-        
+       
         paperView.loadDrawingContext()
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
@@ -68,27 +67,18 @@ class ScratchPaperViewController:UIViewController {
     
     
     @IBAction func penButtomPressed(_ sender: UIButton) {
-//        
-        coloBrushOpcityPanel.isHidden = false
         
-        
-        
+        ColorBrushOpcityPanel.isHidden = !ColorBrushOpcityPanel.isHidden
+    
+        attribute.instance.colorPanelIsEnable = !attribute.instance.colorPanelIsEnable 
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        //if()
-        print("viewWillDisappera get called")
-    }
-    
-    
-    
-    
-    
-    
+ 
+
     
     
     @IBAction func clearButtonPressed(_ sender: UIButton) {
+        
         
         deleteDrawingContext()
         
@@ -98,6 +88,13 @@ class ScratchPaperViewController:UIViewController {
     @IBAction func colorButtonPressed(_ sender: UIButton) {
         
         attribute.instance.colorIndex = sender.tag
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.ColorBrushOpcityPanel.isHidden = true
+            attribute.instance.colorPanelIsEnable = false
+        }
+        
+        
     
     }
   
@@ -147,8 +144,14 @@ class ScratchPaperViewController:UIViewController {
         
     }
     
-    
+//    override func viewDidLayoutSubviews() {
+//        print("I can call in subview")
+//    }
   
+    func rentrunToDrawingView(){
+        ColorBrushOpcityPanel.isHidden = true
+        attribute.instance.colorPanelIsEnable = false
+    }
     
    
     

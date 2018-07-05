@@ -10,7 +10,6 @@ import UIKit
 
 class ToolBarView: UIView {
 
-    let paperView = ScratchPaperView()
     
     
     

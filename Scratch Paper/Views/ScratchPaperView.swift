@@ -12,8 +12,7 @@ import CoreData
 class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
-    
-    //let ScratchPaperCL = ScratchPaperViewController()
+
     
 
     var lastPoint = CGPoint()
@@ -31,10 +30,12 @@ class ScratchPaperView: UIView {
        
         
         if let touch = touches.first{
-           previousPoint1 = touch.location(in: self)
             
-           
-          
+           previousPoint1 = touch.location(in: self)
+          // controlColorPanelEnable()
+            
+            
+            
         }
         
     }
@@ -69,9 +70,15 @@ class ScratchPaperView: UIView {
         setContextLineWith(newDrawingContext: newDrawingContext)
         setContextAlpah(newDrawingContext: newDrawingContext)
         
-        drawContextArray.append(newDrawingContext)
-        saveDrawingContext()
-        self.setNeedsDisplay()
+        
+       if attribute.instance.colorPanelIsEnable == false {
+            //print("colorPanelView is hidden")
+            drawContextArray.append(newDrawingContext)
+            saveDrawingContext()
+            self.setNeedsDisplay()
+        }
+        
+        
 
 
     }
@@ -81,16 +88,15 @@ class ScratchPaperView: UIView {
         let context = UIGraphicsGetCurrentContext()
         
         context?.beginPath()
-        
         for points in drawContextArray{
-            
+           
             let mid1X = CGFloat(points.mid1X)
             let mid1Y = CGFloat(points.mid1Y)
             let mid2X = CGFloat(points.mid2X)
             let mid2Y = CGFloat(points.mid2Y)
             let previousPoint1X = CGFloat(points.previousPoint1X)
             let previousPoint1Y = CGFloat(points.previousPoint1Y)
-            
+           // print("mid1X \(mid1X)")
             
             context?.move(to: CGPoint(x:mid1X, y: mid1Y))
             context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
@@ -158,6 +164,23 @@ class ScratchPaperView: UIView {
     func midPoint(p1: CGPoint, p2: CGPoint) -> CGPoint {
         return CGPoint(x: (p1.x + p2.x) / 2.0, y: (p1.y + p2.y) / 2.0)
     }
+    
+//
+//    func controlColorPanelEnable(){
+//
+//        if !attribute.instance.colorPanelIsEnable{
+//            attribute.instance.numClikedWhenColorPanelIsEnable += 1
+//        }
+//
+//        if attribute.instance.numClikedWhenColorPanelIsEnable == 2 {
+//            print("I get called num hit 2")
+//            colorPanelView.isHidden = true
+//            print("colorPanelView.isHidden \(colorPanelView.isHidden)")
+//            attribute.instance.numClikedWhenColorPanelIsEnable = 0
+//        }
+//
+//
+//    }
     
     
 }

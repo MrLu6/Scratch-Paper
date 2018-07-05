@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ColorPanelImageView: UIImageView {
+class ColorBrushOpcityPanel: UIView {
 
    
-
+    
+    
 }
