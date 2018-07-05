@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ColorPanelView: UIView {
+class ColorPanelImageView: UIImageView {
 
    
 

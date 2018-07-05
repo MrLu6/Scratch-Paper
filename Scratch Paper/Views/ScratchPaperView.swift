@@ -13,6 +13,7 @@ class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
     
+    //let ScratchPaperCL = ScratchPaperViewController()
     
 
     var lastPoint = CGPoint()
@@ -27,13 +28,7 @@ class ScratchPaperView: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-//        if !self.isUserInteractionEnabled && attribute.instance.colorPanelIsEnable{
-//            
-//            self.isUserInteractionEnabled = true
-//            attribute.instance.colorPanelIsEnable = true
-//            
-//            
-//        }
+       
         
         if let touch = touches.first{
            previousPoint1 = touch.location(in: self)

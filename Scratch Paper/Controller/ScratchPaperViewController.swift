@@ -56,6 +56,7 @@ class ScratchPaperViewController:UIViewController {
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
         
+        print("viewDid load get called")
         
     }
 
@@ -68,14 +69,24 @@ class ScratchPaperViewController:UIViewController {
     
     @IBAction func penButtomPressed(_ sender: UIButton) {
 //        
-        coloBrushOpcityPanel.isHidden = attribute.instance.colorPanelIsEnable
+        coloBrushOpcityPanel.isHidden = false
         
-       
-        
-//        paperView.isUserInteractionEnabled = false
         
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        //if()
+        print("viewWillDisappera get called")
+    }
+    
+    
+    
+    
+    
+    
+    
     
     @IBAction func clearButtonPressed(_ sender: UIButton) {
         
