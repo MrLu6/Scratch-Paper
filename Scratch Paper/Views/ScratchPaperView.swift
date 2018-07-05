@@ -12,22 +12,33 @@ import CoreData
 class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
-   
     
+    
+
     var lastPoint = CGPoint()
     
     var previousPoint1: CGPoint?
     var previousPoint2: CGPoint?
     var currentPoint: CGPoint?
-
+    
+    
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+//        if !self.isUserInteractionEnabled && attribute.instance.colorPanelIsEnable{
+//            
+//            self.isUserInteractionEnabled = true
+//            attribute.instance.colorPanelIsEnable = true
+//            
+//            
+//        }
         
         if let touch = touches.first{
            previousPoint1 = touch.location(in: self)
+            
+           
           
         }
         
@@ -60,6 +71,8 @@ class ScratchPaperView: UIView {
         newDrawingContext.previousPoint1Y = Float((previousPoint1?.y)!)
         
         setContextColor(newDrawingContext: newDrawingContext)
+        setContextLineWith(newDrawingContext: newDrawingContext)
+        setContextAlpah(newDrawingContext: newDrawingContext)
         
         drawContextArray.append(newDrawingContext)
         saveDrawingContext()
@@ -87,8 +100,8 @@ class ScratchPaperView: UIView {
             context?.move(to: CGPoint(x:mid1X, y: mid1Y))
             context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
             context?.setLineCap(.round)
-            context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: 1)
-            context?.setLineWidth(5)
+            context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: CGFloat(points.numOpacity))
+            context?.setLineWidth(CGFloat(points.numBrush))
             context?.strokePath()
             
             
@@ -102,16 +115,23 @@ class ScratchPaperView: UIView {
     
     
     func setContextColor(newDrawingContext: DrawContext ){
-       // print("setColor get called")
+       
         newDrawingContext.colorR = attribute.instance.colorRGB[attribute.instance.colorIndex].0
         newDrawingContext.colorG = attribute.instance.colorRGB[attribute.instance.colorIndex].1
         newDrawingContext.colorB = attribute.instance.colorRGB[attribute.instance.colorIndex].2
-        
-//        print("Index \(attribute.instance.colorIndex)")
-//        print("red \(newDrawingContext.colorR ) \n")
-//        print("green \(newDrawingContext.colorG ) \n")
-//        print("blue \(newDrawingContext.colorB ) \n")
 
+    }
+    
+    func setContextLineWith(newDrawingContext: DrawContext ){
+        
+        newDrawingContext.numBrush = attribute.instance.numBrush
+        
+    }
+    
+    func setContextAlpah(newDrawingContext: DrawContext){
+        
+        newDrawingContext.numOpacity = attribute.instance.numOpacity
+        
     }
         
         

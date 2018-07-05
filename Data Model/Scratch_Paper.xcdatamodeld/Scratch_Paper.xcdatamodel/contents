@@ -8,10 +8,12 @@
         <attribute name="mid1Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mid2X" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mid2Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" customClassName="(Float,Float)" syncable="YES"/>
+        <attribute name="numBrush" attributeType="Integer 16" defaultValueString="5" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numOpacity" optional="YES" attributeType="Float" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="previousPoint1X" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="previousPoint1Y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="DrawContext" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E296B51920EDE6D100CC782A /* ColorPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296B51820EDE6D100CC782A /* ColorPanelView.swift */; };
+		E296B51B20EDE70B00CC782A /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296B51A20EDE70B00CC782A /* ToolBarView.swift */; };
 		E2C7662720E99F5600334629 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7662620E99F5600334629 /* AppDelegate.swift */; };
 		E2C7662920E99F5600334629 /* ScratchPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7662820E99F5600334629 /* ScratchPaperViewController.swift */; };
 		E2C7662C20E99F5600334629 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2C7662A20E99F5600334629 /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E296B51820EDE6D100CC782A /* ColorPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPanelView.swift; sourceTree = "<group>"; };
+		E296B51A20EDE70B00CC782A /* ToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarView.swift; sourceTree = "<group>"; };
 		E2C7662320E99F5600334629 /* Scratch Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scratch Paper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C7662620E99F5600334629 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2C7662820E99F5600334629 /* ScratchPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchPaperViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				E2C7663D20E9E6EF00334629 /* ScratchPaperView.swift */,
+				E296B51820EDE6D100CC782A /* ColorPanelView.swift */,
+				E296B51A20EDE70B00CC782A /* ToolBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,8 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C7663E20E9E6EF00334629 /* ScratchPaperView.swift in Sources */,
+				E296B51920EDE6D100CC782A /* ColorPanelView.swift in Sources */,
 				E2C7662920E99F5600334629 /* ScratchPaperViewController.swift in Sources */,
 				E2C7662F20E99F5600334629 /* Scratch_Paper.xcdatamodeld in Sources */,
+				E296B51B20EDE70B00CC782A /* ToolBarView.swift in Sources */,
 				E2F4089C20ECC28000C7809C /* attribute.swift in Sources */,
 				E2C7662720E99F5600334629 /* AppDelegate.swift in Sources */,
 			);
