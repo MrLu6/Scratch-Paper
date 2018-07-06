@@ -49,6 +49,14 @@
                                                     <action selector="clearButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="M01-hN-bLj"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DK-TY-XWk">
+                                                <rect key="frame" x="339" y="17" width="38" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Undo"/>
+                                                <connections>
+                                                    <action selector="unDoButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="4oz-AW-lGN"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94754986470000002" green="0.96993559600000001" blue="0.94128751460000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </view>

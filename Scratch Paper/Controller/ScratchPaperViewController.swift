@@ -75,6 +75,14 @@ class ScratchPaperViewController:UIViewController {
         attribute.instance.eraserEnable = false
     }
     
+    
+    @IBAction func unDoButtomPressed(_ sender: UIButton) {
+        
+        paperView.undo()
+        
+    }
+    
+    
  
     @IBAction func eraserButtonPressed(_ sender: Any) {
         
@@ -162,22 +170,11 @@ class ScratchPaperViewController:UIViewController {
         
     }
     
-//    override func viewDidLayoutSubviews() {
-//        print("I can call in subview")
-//    }
-  
     func rentrunToDrawingView(){
         ColorBrushOpcityPanel.isHidden = true
         attribute.instance.colorPanelIsEnable = false
     }
     
-   
-    
-    
-    
-    
-
-
 
 }
 

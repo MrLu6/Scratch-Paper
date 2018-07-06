@@ -16,12 +16,9 @@ class attribute{
     
     var numBrush: Int16 = 5
     var numOpacity: Float = 1
-    
-     var colorPanelIsEnable = false
-//    
-     var numClikedWhenColorPanelIsEnable = 0
-    
-     var eraserEnable = false
+    var colorPanelIsEnable = false
+    var numClikedWhenColorPanelIsEnable = 0
+    var eraserEnable = false
     
     static let instance = attribute()
     

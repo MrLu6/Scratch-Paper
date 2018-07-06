@@ -12,29 +12,22 @@ import CoreData
 class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
-
-    
-
-    var lastPoint = CGPoint()
-    
     var previousPoint1: CGPoint?
     var previousPoint2: CGPoint?
     var currentPoint: CGPoint?
-    
+    var touchBeginPointArray: [CGPoint] = []
     
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-       
-        
         if let touch = touches.first{
             
-           previousPoint1 = touch.location(in: self)
-          // controlColorPanelEnable()
+          previousPoint1 = touch.location(in: self)
+          touchBeginPointArray.append(touch.location(in: self))
             
-            
+          //print("First touch point: \(touch.location(in: self)) \n")
             
         }
         
@@ -72,15 +65,11 @@ class ScratchPaperView: UIView {
         
         
        if attribute.instance.colorPanelIsEnable == false {
-            //print("colorPanelView is hidden")
             drawContextArray.append(newDrawingContext)
             saveDrawingContext()
             self.setNeedsDisplay()
-        }
+       }
         
-        
-
-
     }
     
     override func draw( _ rect: CGRect) {
@@ -96,7 +85,6 @@ class ScratchPaperView: UIView {
             let mid2Y = CGFloat(points.mid2Y)
             let previousPoint1X = CGFloat(points.previousPoint1X)
             let previousPoint1Y = CGFloat(points.previousPoint1Y)
-           // print("mid1X \(mid1X)")
             
             context?.move(to: CGPoint(x:mid1X, y: mid1Y))
             context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
@@ -106,20 +94,15 @@ class ScratchPaperView: UIView {
             context?.setLineWidth(CGFloat(points.numBrush))
             context?.strokePath()
             
-            
-            
         }
   
-        
-        
-        
     }
     
     
     func setContextColor(newDrawingContext: DrawContext ){
        
         if attribute.instance.eraserEnable == true {
-            print("eraserEnable is true")
+            //print("eraserEnable is true")
             newDrawingContext.colorR = Float(1)
             newDrawingContext.colorG = Float(1)
             newDrawingContext.colorB = Float(1)
@@ -148,8 +131,7 @@ class ScratchPaperView: UIView {
         
     }
         
-        
-    
+
     func saveDrawingContext(){
         
         do{
@@ -177,6 +159,34 @@ class ScratchPaperView: UIView {
     func midPoint(p1: CGPoint, p2: CGPoint) -> CGPoint {
         return CGPoint(x: (p1.x + p2.x) / 2.0, y: (p1.y + p2.y) / 2.0)
     }
+    
+    
+    func undo(){
+        
+        if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty{
+            
+            var currentContext = drawContextArray.removeLast()
+            
+            var currentPoint = CGPoint(x: CGFloat(currentContext.previousPoint1X), y: CGFloat(currentContext.previousPoint1Y))
+            
+            let lastBeginTouchPoint = touchBeginPointArray.removeLast()
+            
+            context.delete(currentContext)
+            while (lastBeginTouchPoint != currentPoint && !drawContextArray.isEmpty){
+                currentContext = drawContextArray.removeLast()
+                currentPoint = CGPoint(x: CGFloat(currentContext.previousPoint1X), y: CGFloat(currentContext.previousPoint1Y))
+                context.delete(currentContext)
+                
+            }
+            
+            saveDrawingContext()
+            self.setNeedsDisplay()
+            
+        }
+        
+        
+    }
+    
     
 //
 //    func controlColorPanelEnable(){
