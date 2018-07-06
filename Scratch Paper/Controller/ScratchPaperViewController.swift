@@ -55,7 +55,7 @@ class ScratchPaperViewController:UIViewController {
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
         
-        print("viewDid load get called")
+      
         
     }
 
@@ -70,16 +70,31 @@ class ScratchPaperViewController:UIViewController {
         
         ColorBrushOpcityPanel.isHidden = !ColorBrushOpcityPanel.isHidden
     
-        attribute.instance.colorPanelIsEnable = !attribute.instance.colorPanelIsEnable 
+        attribute.instance.colorPanelIsEnable = !attribute.instance.colorPanelIsEnable
+        
+        attribute.instance.eraserEnable = false
     }
     
  
+    @IBAction func eraserButtonPressed(_ sender: Any) {
+        
+        attribute.instance.eraserEnable = !attribute.instance.eraserEnable
+        attribute.instance.colorPanelIsEnable = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.ColorBrushOpcityPanel.isHidden = true
 
+        }
+      
+        
+        
+    }
+    
     
     
     @IBAction func clearButtonPressed(_ sender: UIButton) {
         
-        
+        rentrunToDrawingView()
         deleteDrawingContext()
         
     }
@@ -88,11 +103,14 @@ class ScratchPaperViewController:UIViewController {
     @IBAction func colorButtonPressed(_ sender: UIButton) {
         
         attribute.instance.colorIndex = sender.tag
+        attribute.instance.colorPanelIsEnable = false
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.ColorBrushOpcityPanel.isHidden = true
-            attribute.instance.colorPanelIsEnable = false
+            
         }
+        
+        //print("attribute.instance.eraserEnable is \(attribute.instance.eraserEnable)")
         
         
     

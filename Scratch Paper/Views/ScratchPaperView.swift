@@ -101,6 +101,7 @@ class ScratchPaperView: UIView {
             context?.move(to: CGPoint(x:mid1X, y: mid1Y))
             context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
             context?.setLineCap(.round)
+            
             context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: CGFloat(points.numOpacity))
             context?.setLineWidth(CGFloat(points.numBrush))
             context?.strokePath()
@@ -117,9 +118,18 @@ class ScratchPaperView: UIView {
     
     func setContextColor(newDrawingContext: DrawContext ){
        
-        newDrawingContext.colorR = attribute.instance.colorRGB[attribute.instance.colorIndex].0
-        newDrawingContext.colorG = attribute.instance.colorRGB[attribute.instance.colorIndex].1
-        newDrawingContext.colorB = attribute.instance.colorRGB[attribute.instance.colorIndex].2
+        if attribute.instance.eraserEnable == true {
+            print("eraserEnable is true")
+            newDrawingContext.colorR = Float(1)
+            newDrawingContext.colorG = Float(1)
+            newDrawingContext.colorB = Float(1)
+        }else{
+     
+            newDrawingContext.colorR = attribute.instance.colorRGB[attribute.instance.colorIndex].0
+            newDrawingContext.colorG = attribute.instance.colorRGB[attribute.instance.colorIndex].1
+            newDrawingContext.colorB = attribute.instance.colorRGB[attribute.instance.colorIndex].2
+            
+        }
 
     }
     
@@ -130,8 +140,11 @@ class ScratchPaperView: UIView {
     }
     
     func setContextAlpah(newDrawingContext: DrawContext){
-        
-        newDrawingContext.numOpacity = attribute.instance.numOpacity
+        if attribute.instance.eraserEnable == true{
+            newDrawingContext.numOpacity = Float(1)
+        }else{
+            newDrawingContext.numOpacity = attribute.instance.numOpacity
+        }
         
     }
         

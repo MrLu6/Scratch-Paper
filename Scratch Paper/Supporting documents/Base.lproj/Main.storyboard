@@ -25,33 +25,32 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdu-zN-Bhr" userLabel="ToolBar View" customClass="ToolBarView" customModule="Scratch_Paper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="300" translatesAutoresizingMaskIntoConstraints="NO" id="QCk-S0-gyA" userLabel="barIconToolStack">
-                                                <rect key="frame" x="215" y="0.0" width="378" height="64"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-LA-11j" userLabel="pen">
-                                                        <rect key="frame" x="0.0" y="0.0" width="39" height="64"/>
-                                                        <state key="normal" image="Icon-App-72x72"/>
-                                                        <connections>
-                                                            <action selector="penButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="BsF-u7-Ox3"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joy-iM-UBe" userLabel="clesar">
-                                                        <rect key="frame" x="339" y="0.0" width="39" height="64"/>
-                                                        <state key="normal" title="clear"/>
-                                                        <connections>
-                                                            <action selector="clearButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="M01-hN-bLj"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-LA-11j" userLabel="pen">
+                                                <rect key="frame" x="215" y="-4" width="72" height="72"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="Icon-App-72x72"/>
+                                                <connections>
+                                                    <action selector="penButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="BsF-u7-Ox3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G82-67-VYb" userLabel="eraser">
+                                                <rect key="frame" x="430" y="7" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="eraser"/>
+                                                <connections>
+                                                    <action selector="eraserButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="f3X-ks-EOO"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joy-iM-UBe" userLabel="clesar">
+                                                <rect key="frame" x="658" y="17" width="34" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="clear"/>
+                                                <connections>
+                                                    <action selector="clearButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="M01-hN-bLj"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94754986470000002" green="0.96993559600000001" blue="0.94128751460000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstItem="QCk-S0-gyA" firstAttribute="top" secondItem="tdu-zN-Bhr" secondAttribute="top" id="04b-ML-zyl"/>
-                                            <constraint firstAttribute="trailing" secondItem="QCk-S0-gyA" secondAttribute="trailing" constant="175" id="PFa-xj-19z"/>
-                                            <constraint firstItem="QCk-S0-gyA" firstAttribute="leading" secondItem="tdu-zN-Bhr" secondAttribute="leading" constant="215" id="SAe-sa-isU"/>
-                                            <constraint firstAttribute="bottom" secondItem="QCk-S0-gyA" secondAttribute="bottom" id="zMo-Q3-x8k"/>
-                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperView" customModule="Scratch_Paper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -244,6 +243,7 @@
     </scenes>
     <resources>
         <image name="Icon-App-72x72" width="72" height="72"/>
+        <image name="eraser" width="50" height="50"/>
         <image name="promot" width="859" height="680"/>
     </resources>
 </document>
