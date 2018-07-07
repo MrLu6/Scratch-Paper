@@ -52,6 +52,8 @@ class ScratchPaperViewController:UIViewController {
         
        
         paperView.loadDrawingContext()
+        paperView.loadTochBeginPoint()
+        paperView.loadTochEndPoint()
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
         
@@ -142,7 +144,7 @@ class ScratchPaperViewController:UIViewController {
             
         }
         
-        paperView.saveDrawingContext()
+        paperView.save()
         paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
         paperView.setNeedsDisplay()
         

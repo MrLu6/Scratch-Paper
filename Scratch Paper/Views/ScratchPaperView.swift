@@ -19,12 +19,12 @@ class ScratchPaperView: UIView {
     var previousPoint2: CGPoint?
     var currentPoint: CGPoint?
     
-    var touchBeginPointArray: [CGPoint] = []
+    //var touchBeginPointArray: [CGPoint] = []
+    var touchBeginPointArray = [TouchBeginPoint]()
     
-    
-    
-    var touchEndPointArray: [CGPoint] = []
-    var touchBeginPoint: NSObject?
+    //var touchEndPointArray: [CGPoint] = []
+    var touchEndPointArray = [TouchEndPoint]()
+   
     
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -36,7 +36,13 @@ class ScratchPaperView: UIView {
           previousPoint1 = touch.location(in: self)
             
             
-          touchBeginPointArray.append(touch.location(in: self))
+            let newTouchBeginPoint = TouchBeginPoint(context:self.context)
+            newTouchBeginPoint.x = Float ((previousPoint1?.x)!)
+            newTouchBeginPoint.y = Float((previousPoint1?.y)!)
+            touchBeginPointArray.append(newTouchBeginPoint)
+            save()
+            
+          //touchBeginPointArray.append(touch.location(in: self))
            
           //print("First touch point: \(touch.location(in: self)) \n")
             
@@ -78,7 +84,7 @@ class ScratchPaperView: UIView {
         
        if attribute.instance.colorPanelIsEnable == false {
             drawContextArray.append(newDrawingContext)
-            saveDrawingContext()
+            save()
             self.setNeedsDisplay()
        }
         
@@ -151,7 +157,7 @@ class ScratchPaperView: UIView {
     }
         
 
-    func saveDrawingContext(){
+    func save(){
         
         do{
             try context.save()
@@ -175,15 +181,38 @@ class ScratchPaperView: UIView {
         
     }
     
+    func loadTochBeginPoint(){
+        
+        let request: NSFetchRequest<TouchBeginPoint> = TouchBeginPoint.fetchRequest()
+        
+        do{
+            touchBeginPointArray = try context.fetch(request)
+        }catch{
+            print("Error occurs when loading context\(error)")
+        }
+    }
+    
+    func loadTochEndPoint(){
+        
+        let request: NSFetchRequest<TouchEndPoint> = TouchEndPoint.fetchRequest()
+        
+        do{
+            touchEndPointArray = try context.fetch(request)
+        }catch{
+            print("Error occurs when loading context\(error)")
+        }
+    }
+    
+    
     func midPoint(p1: CGPoint, p2: CGPoint) -> CGPoint {
         return CGPoint(x: (p1.x + p2.x) / 2.0, y: (p1.y + p2.y) / 2.0)
     }
     
     
     func undo(){
-        
-        print("drawContextArray.count \(drawContextArray.count)")
-        print("touchBeginPointArray.count \(touchEndPointArray.count)")
+//
+//        print("drawContextArray.count \(drawContextArray.count)")
+//        print("touchBeginPointArray.count \(touchEndPointArray.count)")
         
         //
         if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty {
@@ -192,10 +221,14 @@ class ScratchPaperView: UIView {
             
             var currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
            // print("undo start point\(currentPoint)")
-            touchEndPointArray.append(currentPoint)
+            let newTouchEndPoint = TouchEndPoint(context: self.context)
+            newTouchEndPoint.x = Float(currentPoint.x)
+            newTouchEndPoint.y = Float(currentPoint.y)
+            touchEndPointArray.append(newTouchEndPoint)
+            save()
             //fix
-            let lastBeginTouchPoint = touchBeginPointArray.removeLast()
-            
+            let tempPoint = touchBeginPointArray.removeLast()
+            let lastBeginTouchPoint = CGPoint(x: CGFloat(tempPoint.x), y: CGFloat(tempPoint.y))
             
             undoRedoContextStack.append(currentContext)
            
@@ -211,7 +244,7 @@ class ScratchPaperView: UIView {
             
             //print("end of undo Point\(currentPoint)")
             
-            saveDrawingContext()
+            save()
             self.setNeedsDisplay()
             
         }
@@ -237,10 +270,16 @@ class ScratchPaperView: UIView {
             
             
            // fix  touchBeginPointArray.append(currentPoint)
-             touchBeginPointArray.append(currentPoint)
+            let newTouchBeginPoint = TouchBeginPoint(context:self.context)
+            newTouchBeginPoint.x = Float (currentPoint.x)
+            newTouchBeginPoint.y = Float(currentPoint.y)
+            touchBeginPointArray.append(newTouchBeginPoint)
+            save()
+
             
            // print("start of append point \(currentPoint)")
-            let lastEndTouchPoint = touchEndPointArray.removeLast()
+            let tempPoint = touchEndPointArray.removeLast()
+            let lastEndTouchPoint = CGPoint(x: CGFloat(tempPoint.x), y: CGFloat(tempPoint.y))
             //print("lastEndTouchPoint \(lastEndTouchPoint)")
             
             while (lastEndTouchPoint != currentPoint && !undoRedoContextStack.isEmpty ){
@@ -254,7 +293,7 @@ class ScratchPaperView: UIView {
             
             
             
-            saveDrawingContext()
+            save()
             self.setNeedsDisplay()
         }
         
