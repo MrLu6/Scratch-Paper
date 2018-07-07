@@ -82,6 +82,12 @@ class ScratchPaperViewController:UIViewController {
         
     }
     
+   
+    @IBAction func reDoButtomPrssed(_ sender: Any) {
+        
+        paperView.redo()
+        
+    }
     
  
     @IBAction func eraserButtonPressed(_ sender: Any) {

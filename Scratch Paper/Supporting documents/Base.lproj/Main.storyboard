@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-LA-11j" userLabel="pen">
-                                                <rect key="frame" x="215" y="-4" width="72" height="72"/>
+                                                <rect key="frame" x="155" y="-4" width="72" height="72"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="Icon-App-72x72"/>
                                                 <connections>
@@ -50,11 +50,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DK-TY-XWk">
-                                                <rect key="frame" x="339" y="17" width="38" height="30"/>
+                                                <rect key="frame" x="279" y="17" width="38" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Undo"/>
                                                 <connections>
                                                     <action selector="unDoButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="4oz-AW-lGN"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzu-dk-X70">
+                                                <rect key="frame" x="353" y="17" width="36" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Redo"/>
+                                                <connections>
+                                                    <action selector="reDoButtomPrssed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Mqc-tM-vk8"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -246,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2S-QA-9kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571.875" y="315.8203125"/>
+            <point key="canvasLocation" x="264" y="265"/>
         </scene>
     </scenes>
     <resources>

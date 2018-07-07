@@ -12,10 +12,19 @@ import CoreData
 class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
+    var undoRedoContextStack = [DrawContext]()
+    
+    
     var previousPoint1: CGPoint?
     var previousPoint2: CGPoint?
     var currentPoint: CGPoint?
+    
     var touchBeginPointArray: [CGPoint] = []
+    
+    
+    
+    var touchEndPointArray: [CGPoint] = []
+    var touchBeginPoint: NSObject?
     
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -25,8 +34,10 @@ class ScratchPaperView: UIView {
         if let touch = touches.first{
             
           previousPoint1 = touch.location(in: self)
-          touchBeginPointArray.append(touch.location(in: self))
             
+            
+          touchBeginPointArray.append(touch.location(in: self))
+           
           //print("First touch point: \(touch.location(in: self)) \n")
             
         }
@@ -48,6 +59,7 @@ class ScratchPaperView: UIView {
         // calculate mid point
         let mid1 = midPoint(p1: previousPoint1!, p2: previousPoint2!)
         let mid2 = midPoint(p1: currentPoint, p2: previousPoint1!)
+        
         let newDrawingContext = DrawContext(context: self.context)
         
         newDrawingContext.mid1X = Float(mid1.x)
@@ -72,6 +84,12 @@ class ScratchPaperView: UIView {
         
     }
     
+  
+    
+    
+    
+    
+    
     override func draw( _ rect: CGRect) {
        
         let context = UIGraphicsGetCurrentContext()
@@ -88,6 +106,7 @@ class ScratchPaperView: UIView {
             
             context?.move(to: CGPoint(x:mid1X, y: mid1Y))
             context?.addQuadCurve(to: CGPoint(x: mid2X, y: mid2Y), control: CGPoint(x: previousPoint1X, y:previousPoint1Y ))
+           // print("end point in draw:\(CGPoint(x: previousPoint1X, y:previousPoint1Y ))")
             context?.setLineCap(.round)
             
             context?.setStrokeColor(red:CGFloat(points.colorR), green: CGFloat(points.colorG), blue: CGFloat(points.colorB), alpha: CGFloat(points.numOpacity))
@@ -163,21 +182,34 @@ class ScratchPaperView: UIView {
     
     func undo(){
         
-        if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty{
+        print("drawContextArray.count \(drawContextArray.count)")
+        print("touchBeginPointArray.count \(touchEndPointArray.count)")
+        
+        //
+        if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty {
             
             var currentContext = drawContextArray.removeLast()
             
-            var currentPoint = CGPoint(x: CGFloat(currentContext.previousPoint1X), y: CGFloat(currentContext.previousPoint1Y))
-            
+            var currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
+           // print("undo start point\(currentPoint)")
+            touchEndPointArray.append(currentPoint)
+            //fix
             let lastBeginTouchPoint = touchBeginPointArray.removeLast()
             
-            context.delete(currentContext)
+            
+            undoRedoContextStack.append(currentContext)
+           
+            //context.delete(currentContext)
+            
             while (lastBeginTouchPoint != currentPoint && !drawContextArray.isEmpty){
                 currentContext = drawContextArray.removeLast()
-                currentPoint = CGPoint(x: CGFloat(currentContext.previousPoint1X), y: CGFloat(currentContext.previousPoint1Y))
-                context.delete(currentContext)
+                currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
+                undoRedoContextStack.append(currentContext)
+                //context.delete(currentContext)
                 
             }
+            
+            //print("end of undo Point\(currentPoint)")
             
             saveDrawingContext()
             self.setNeedsDisplay()
@@ -185,6 +217,48 @@ class ScratchPaperView: UIView {
         }
         
         
+    }
+    
+    func redo(){
+        
+        print("undoRedoContextStack.count \(undoRedoContextStack.count)")
+        print("touchEndPointArray.count \(touchEndPointArray.count)")
+        
+        
+        if !undoRedoContextStack.isEmpty && !touchEndPointArray.isEmpty {
+            
+            var currentContext = undoRedoContextStack.removeLast()
+            
+            
+            drawContextArray.append(currentContext)
+           
+            
+            var currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
+            
+            
+           // fix  touchBeginPointArray.append(currentPoint)
+             touchBeginPointArray.append(currentPoint)
+            
+           // print("start of append point \(currentPoint)")
+            let lastEndTouchPoint = touchEndPointArray.removeLast()
+            //print("lastEndTouchPoint \(lastEndTouchPoint)")
+            
+            while (lastEndTouchPoint != currentPoint && !undoRedoContextStack.isEmpty ){
+                currentContext = undoRedoContextStack.removeLast()
+                currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
+                drawContextArray.append(currentContext)
+            }
+            
+           // print("end of append point in lastEndTouchPoint \(lastEndTouchPoint)")
+           // print("end of append point in stack \(currentPoint)")
+            
+            
+            
+            saveDrawingContext()
+            self.setNeedsDisplay()
+        }
+        
+
     }
     
     
