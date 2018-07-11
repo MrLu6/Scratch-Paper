@@ -50,12 +50,18 @@ class ScratchPaperViewController:UIViewController {
         
        ColorBrushOpcityPanel.isHidden = true
         
-       
+//        paperView.deleteDrawingContext()
+//        print("drawContextArray.count after call delete load \(paperView.drawContextArray.count) \n")
+
         paperView.loadDrawingContext()
         paperView.loadTochBeginPoint()
         paperView.loadTochEndPoint()
-        paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
-        paperView.setNeedsDisplay()
+        
+        paperView.resetDrawContextBeforeTerminated()
+        //paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
+        
+
+        //paperView.setNeedsDisplay()
         
       
         
@@ -111,7 +117,7 @@ class ScratchPaperViewController:UIViewController {
     @IBAction func clearButtonPressed(_ sender: UIButton) {
         
         rentrunToDrawingView()
-        deleteDrawingContext()
+        paperView.deleteDrawingContext()
         
     }
     
@@ -135,20 +141,6 @@ class ScratchPaperViewController:UIViewController {
   
   
     
-    func deleteDrawingContext(){
-        
-        
-        for drawContext in paperView.drawContextArray{
-            
-            paperView.context.delete(drawContext)
-            
-        }
-        
-        paperView.save()
-        paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
-        paperView.setNeedsDisplay()
-        
-    }
 
    
     

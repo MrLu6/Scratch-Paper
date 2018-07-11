@@ -13,17 +13,25 @@ class ScratchPaperView: UIView {
     
     var drawContextArray  = [DrawContext]()
     var undoRedoContextStack = [DrawContext]()
+   
+    
+    var defaults = UserDefaults.standard
     
     
     var previousPoint1: CGPoint?
     var previousPoint2: CGPoint?
     var currentPoint: CGPoint?
     
-    //var touchBeginPointArray: [CGPoint] = []
-    var touchBeginPointArray = [TouchBeginPoint]()
     
-    //var touchEndPointArray: [CGPoint] = []
+    var touchBeginPointArray = [TouchBeginPoint]()
+    var undoTouchBeginPointArray = [TouchBeginPoint]()
+    
+
     var touchEndPointArray = [TouchEndPoint]()
+    var redoTouchEndPointArray = [TouchEndPoint]()
+    
+    
+    var numUndoRedoArray = [String]()
    
     
     
@@ -35,16 +43,11 @@ class ScratchPaperView: UIView {
             
           previousPoint1 = touch.location(in: self)
             
-            
             let newTouchBeginPoint = TouchBeginPoint(context:self.context)
             newTouchBeginPoint.x = Float ((previousPoint1?.x)!)
             newTouchBeginPoint.y = Float((previousPoint1?.y)!)
             touchBeginPointArray.append(newTouchBeginPoint)
             save()
-            
-          //touchBeginPointArray.append(touch.location(in: self))
-           
-          //print("First touch point: \(touch.location(in: self)) \n")
             
         }
         
@@ -55,10 +58,61 @@ class ScratchPaperView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        //guard let touch = touches.first else { return }
+        for touch in touches {
+           // print("touch move: \(touch.location(in: self))")
+            let newDrawingContext = DrawContext(context: self.context)
+        
+            let previousPoint2 = previousPoint1
+            previousPoint1 = touch.previousLocation(in: self)
+        
+           // print("previousPoint1 in touchMoved \(previousPoint1) \n")
+            let currentPoint = touch.location(in: self)
+        
+        
+            // calculate mid point
+            let mid1 = midPoint(p1: previousPoint1!, p2: previousPoint2!)
+            let mid2 = midPoint(p1: currentPoint, p2: previousPoint1!)
+        
+        
+        
+            newDrawingContext.mid1X = Float(mid1.x)
+            newDrawingContext.mid1Y = Float(mid1.y)
+        
+            newDrawingContext.mid2X = Float(mid2.x)
+            newDrawingContext.mid2Y = Float(mid2.y)
+        
+            newDrawingContext.previousPoint1X = Float((previousPoint1?.x)!)
+            newDrawingContext.previousPoint1Y = Float((previousPoint1?.y)!)
+        
+            setContextColor(newDrawingContext: newDrawingContext)
+            setContextLineWith(newDrawingContext: newDrawingContext)
+            setContextAlpah(newDrawingContext: newDrawingContext)
+        
+        
+           if attribute.instance.colorPanelIsEnable == false {
+            
+                drawContextArray.append(newDrawingContext)
+                save()
+                self.setNeedsDisplay()
+           }
+        }
+        
+        
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         guard let touch = touches.first else { return }
+        
+    
+        let newDrawingContext = DrawContext(context: self.context)
         
         let previousPoint2 = previousPoint1
         previousPoint1 = touch.previousLocation(in: self)
+        
+        // print("previousPoint1 in touchMoved \(previousPoint1) \n")
         let currentPoint = touch.location(in: self)
         
         
@@ -66,7 +120,7 @@ class ScratchPaperView: UIView {
         let mid1 = midPoint(p1: previousPoint1!, p2: previousPoint2!)
         let mid2 = midPoint(p1: currentPoint, p2: previousPoint1!)
         
-        let newDrawingContext = DrawContext(context: self.context)
+        
         
         newDrawingContext.mid1X = Float(mid1.x)
         newDrawingContext.mid1Y = Float(mid1.y)
@@ -82,25 +136,25 @@ class ScratchPaperView: UIView {
         setContextAlpah(newDrawingContext: newDrawingContext)
         
         
-       if attribute.instance.colorPanelIsEnable == false {
+        if attribute.instance.colorPanelIsEnable == false {
+            let newTouchEndPoint = TouchEndPoint(context: self.context)
+            newTouchEndPoint.x = newDrawingContext.previousPoint1X
+            newTouchEndPoint.y = newDrawingContext.previousPoint1Y
+            touchEndPointArray.append(newTouchEndPoint)
             drawContextArray.append(newDrawingContext)
             save()
             self.setNeedsDisplay()
-       }
-        
+        }
+
     }
     
-  
-    
-    
-    
-    
-    
+
     override func draw( _ rect: CGRect) {
        
         let context = UIGraphicsGetCurrentContext()
         
         context?.beginPath()
+      
         for points in drawContextArray{
            
             let mid1X = CGFloat(points.mid1X)
@@ -173,7 +227,10 @@ class ScratchPaperView: UIView {
         let request: NSFetchRequest<DrawContext> = DrawContext.fetchRequest()
         
         do{
+            
             drawContextArray = try context.fetch(request)
+
+            
         }catch{
             print("Error occurs when loading context\(error)")
         }
@@ -210,40 +267,35 @@ class ScratchPaperView: UIView {
     
     
     func undo(){
-//
-//        print("drawContextArray.count \(drawContextArray.count)")
-//        print("touchBeginPointArray.count \(touchEndPointArray.count)")
-        
-        //
+
+
         if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty {
             
             var currentContext = drawContextArray.removeLast()
+            var currentPoint = (currentContext.previousPoint1X,currentContext.previousPoint1Y)
             
-            var currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
-           // print("undo start point\(currentPoint)")
-            let newTouchEndPoint = TouchEndPoint(context: self.context)
-            newTouchEndPoint.x = Float(currentPoint.x)
-            newTouchEndPoint.y = Float(currentPoint.y)
-            touchEndPointArray.append(newTouchEndPoint)
-            save()
-            //fix
-            let tempPoint = touchBeginPointArray.removeLast()
-            let lastBeginTouchPoint = CGPoint(x: CGFloat(tempPoint.x), y: CGFloat(tempPoint.y))
+           
+            //get last touchBegainPoint from touchBeginPointArray from the back
+            let tempBeginPoint = touchBeginPointArray.removeLast()
+            undoTouchBeginPointArray.append(tempBeginPoint)
+            let lastBeginTouchPoint = (tempBeginPoint.x,tempBeginPoint.y)
+            
+            let tempEndPoint = touchEndPointArray.removeLast()
+            redoTouchEndPointArray.append(tempEndPoint)
             
             undoRedoContextStack.append(currentContext)
-           
-            //context.delete(currentContext)
             
+           
             while (lastBeginTouchPoint != currentPoint && !drawContextArray.isEmpty){
                 currentContext = drawContextArray.removeLast()
-                currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
+                currentPoint = (currentContext.mid1X,currentContext.mid1Y)
                 undoRedoContextStack.append(currentContext)
-                //context.delete(currentContext)
                 
             }
-            
-            //print("end of undo Point\(currentPoint)")
-            
+        
+            numUndoRedoArray.append("undo")
+            defaults.set(numUndoRedoArray, forKey: "NumUndoRedoArray")
+  
             save()
             self.setNeedsDisplay()
             
@@ -254,70 +306,118 @@ class ScratchPaperView: UIView {
     
     func redo(){
         
-        print("undoRedoContextStack.count \(undoRedoContextStack.count)")
-        print("touchEndPointArray.count \(touchEndPointArray.count)")
-        
-        
-        if !undoRedoContextStack.isEmpty && !touchEndPointArray.isEmpty {
+        if !undoRedoContextStack.isEmpty && !redoTouchEndPointArray.isEmpty {
             
             var currentContext = undoRedoContextStack.removeLast()
-            
-            
-            drawContextArray.append(currentContext)
            
+            var currentPoint = (currentContext.previousPoint1X,currentContext.previousPoint1Y)
+            drawContextArray.append(currentContext)
+  
+            if !undoTouchBeginPointArray.isEmpty {
+                touchBeginPointArray.append(undoTouchBeginPointArray.removeLast())
+            }
+        
             
-            var currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
-            
-            
-           // fix  touchBeginPointArray.append(currentPoint)
-            let newTouchBeginPoint = TouchBeginPoint(context:self.context)
-            newTouchBeginPoint.x = Float (currentPoint.x)
-            newTouchBeginPoint.y = Float(currentPoint.y)
-            touchBeginPointArray.append(newTouchBeginPoint)
-            save()
-
-            
-           // print("start of append point \(currentPoint)")
-            let tempPoint = touchEndPointArray.removeLast()
-            let lastEndTouchPoint = CGPoint(x: CGFloat(tempPoint.x), y: CGFloat(tempPoint.y))
-            //print("lastEndTouchPoint \(lastEndTouchPoint)")
-            
-            while (lastEndTouchPoint != currentPoint && !undoRedoContextStack.isEmpty ){
-                currentContext = undoRedoContextStack.removeLast()
-                currentPoint = CGPoint(x: CGFloat(currentContext.mid1X), y: CGFloat(currentContext.mid1Y))
-                drawContextArray.append(currentContext)
+            if !redoTouchEndPointArray.isEmpty {
+                
+                let tempEndPoint = redoTouchEndPointArray.removeLast()
+                touchEndPointArray.append(tempEndPoint)
+                
+                let lastEndTouchPoint = (tempEndPoint.x, tempEndPoint.y)
+                
+                
+                while (lastEndTouchPoint != currentPoint && !undoRedoContextStack.isEmpty ){
+                    currentContext = undoRedoContextStack.removeLast()
+                    currentPoint =  (currentContext.previousPoint1X,currentContext.previousPoint1Y)
+                    drawContextArray.append(currentContext)
+                }
+                
+                numUndoRedoArray.append("redo")
+                
+                defaults.set(numUndoRedoArray, forKey: "NumUndoRedoArray")
+                
+                save()
+                self.setNeedsDisplay()
+                
             }
             
-           // print("end of append point in lastEndTouchPoint \(lastEndTouchPoint)")
-           // print("end of append point in stack \(currentPoint)")
-            
-            
-            
-            save()
-            self.setNeedsDisplay()
         }
         
 
     }
     
     
-//
-//    func controlColorPanelEnable(){
-//
-//        if !attribute.instance.colorPanelIsEnable{
-//            attribute.instance.numClikedWhenColorPanelIsEnable += 1
-//        }
-//
-//        if attribute.instance.numClikedWhenColorPanelIsEnable == 2 {
-//            print("I get called num hit 2")
-//            colorPanelView.isHidden = true
-//            print("colorPanelView.isHidden \(colorPanelView.isHidden)")
-//            attribute.instance.numClikedWhenColorPanelIsEnable = 0
-//        }
-//
-//
-//    }
+    func deleteDrawingContext(){
+        
+        
+        for drawContext in drawContextArray{
+            
+            
+            context.delete(drawContext)
+            drawContextArray.removeLast()
+            
+        }
+        
+        for drawContext in undoRedoContextStack {
+            
+            context.delete(drawContext)
+            drawContextArray.removeLast()
+            
+            
+        }
+        
+        for points in touchBeginPointArray {
+            
+            context.delete(points)
+            touchBeginPointArray.removeLast()
+            
+        }
+        
+        for points in touchEndPointArray {
+            
+            context.delete(points)
+            touchEndPointArray.removeLast()
+            
+        }
+        
+      
+        
+        let numArray = [String]()
+        
+        defaults.set(numArray, forKey: "NumUndoRedoArray")
+        
+        save()
+        
+        self.setNeedsDisplay()
+        
+    }
     
+    func resetDrawContextBeforeTerminated() {
+        
+        if var numArray = defaults.array(forKey: "NumUndoRedoArray") {
+        
+            print(numArray.count)
+            while !(numArray.isEmpty) {
+                
+               
+                let element = numArray.removeFirst() as! String
+                
+                if element == "undo" {
+                 //print("undo get call")
+                    undo()
+                }else {
+                    redo()
+                    //print("redo get call")
+                }
+                
+            }
+            
+            defaults.set(numArray, forKey:"NumUndoRedoArray" )
+        }
+        
+    }
+    
+
     
 }
 

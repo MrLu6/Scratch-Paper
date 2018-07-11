@@ -19,7 +19,7 @@ class attribute{
     var colorPanelIsEnable = false
     var numClikedWhenColorPanelIsEnable = 0
     var eraserEnable = false
-    
+
     
     static let instance = attribute()
     
