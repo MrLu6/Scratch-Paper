@@ -32,9 +32,6 @@ class ScratchPaperViewController:UIViewController {
         numBrushChange()
         brushLabelChange()
         
-//        sender addTarget:self action:@selector(sliderReleasedMethod:) forControlEvents:UIControlEventTouchUpInside
-        
-        
     }
     
     @IBAction func OpacitySlider(_ sender: UISlider) {
@@ -48,28 +45,16 @@ class ScratchPaperViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       ColorBrushOpcityPanel.isHidden = true
-        
-//        paperView.deleteDrawingContext()
-//        print("drawContextArray.count after call delete load \(paperView.drawContextArray.count) \n")
-
+        ColorBrushOpcityPanel.isHidden = true
         paperView.loadDrawingContext()
         paperView.loadTochBeginPoint()
         paperView.loadTochEndPoint()
-        
         paperView.resetDrawContextBeforeTerminated()
-        //paperView.draw(CGRect(x: 0, y: 0, width: paperView.frame.width, height: paperView.frame.height))
-        
-
-        //paperView.setNeedsDisplay()
-        
-      
-        
+       
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
@@ -108,18 +93,31 @@ class ScratchPaperViewController:UIViewController {
 
         }
       
-        
-        
     }
     
     
     
     @IBAction func clearButtonPressed(_ sender: UIButton) {
         
+        if !paperView.drawContextArray.isEmpty {
+        
+            let alert = UIAlertController(title: "Do you want to clear all drawed Context?", message: "You will not be able to recovert any drawed Context", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "Yes", style: .default) { (action) in
+                
+                self.paperView.deleteDrawingContext()
+            }
+            
+            alert.addAction(action)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
+        
+        
         rentrunToDrawingView()
-        paperView.deleteDrawingContext()
         
     }
+    
     
     
     @IBAction func colorButtonPressed(_ sender: UIButton) {
@@ -132,19 +130,9 @@ class ScratchPaperViewController:UIViewController {
             
         }
         
-        //print("attribute.instance.eraserEnable is \(attribute.instance.eraserEnable)")
-        
-        
-    
     }
   
   
-  
-    
-
-   
-    
-    
     func numBrushChange() {
         
         attribute.instance.numBrush = Int16(brushSlider.value)
