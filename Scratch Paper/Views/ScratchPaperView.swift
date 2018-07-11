@@ -354,33 +354,44 @@ class ScratchPaperView: UIView {
             
             
             context.delete(drawContext)
-            drawContextArray.removeLast()
+            drawContextArray.removeFirst()
             
         }
         
         for drawContext in undoRedoContextStack {
             
             context.delete(drawContext)
-            drawContextArray.removeLast()
-            
-            
+            undoRedoContextStack.removeFirst()
+    
         }
         
         for points in touchBeginPointArray {
             
             context.delete(points)
-            touchBeginPointArray.removeLast()
+            touchBeginPointArray.removeFirst()
             
         }
         
         for points in touchEndPointArray {
             
             context.delete(points)
-            touchEndPointArray.removeLast()
+            touchEndPointArray.removeFirst()
             
         }
         
-      
+        for points in undoTouchBeginPointArray {
+            
+            context.delete(points)
+            undoTouchBeginPointArray.removeFirst()
+            
+        }
+        
+        for points in redoTouchEndPointArray {
+            
+            context.delete(points)
+            redoTouchEndPointArray.removeFirst()
+            
+        }
         
         let numArray = [String]()
         
@@ -396,19 +407,11 @@ class ScratchPaperView: UIView {
         
         if var numArray = defaults.array(forKey: "NumUndoRedoArray") {
         
-            print(numArray.count)
             while !(numArray.isEmpty) {
                 
-               
                 let element = numArray.removeFirst() as! String
                 
-                if element == "undo" {
-                 //print("undo get call")
-                    undo()
-                }else {
-                    redo()
-                    //print("redo get call")
-                }
+                element == "undo" ? undo() : redo()
                 
             }
             
