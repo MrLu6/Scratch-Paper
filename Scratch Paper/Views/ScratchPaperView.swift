@@ -34,13 +34,15 @@ class ScratchPaperView: UIView {
         
         if let touch = touches.first{
             
-          previousPoint1 = touch.location(in: self)
+            if touch.type == UITouchType.stylus {
             
-            let newTouchBeginPoint = TouchBeginPoint(context:self.context)
-            newTouchBeginPoint.x = Float ((previousPoint1?.x)!)
-            newTouchBeginPoint.y = Float((previousPoint1?.y)!)
-            touchBeginPointArray.append(newTouchBeginPoint)
-            save()
+                previousPoint1 = touch.location(in: self)
+                let newTouchBeginPoint = TouchBeginPoint(context:self.context)
+                newTouchBeginPoint.x = Float ((previousPoint1?.x)!)
+                newTouchBeginPoint.y = Float((previousPoint1?.y)!)
+                touchBeginPointArray.append(newTouchBeginPoint)
+                save()
+            }
             
         }
         
@@ -51,29 +53,42 @@ class ScratchPaperView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-       let newDrawingContext = pointsInPath(touches, with: event)
-    
-       if attribute.instance.colorPanelIsEnable == false {
-        
-            drawContextArray.append(newDrawingContext)
-            save()
-            self.setNeedsDisplay()
-       }
-        
+        if let touch = touches.first {
+            
+            if touch.type == UITouchType.stylus {
+                
+                   let newDrawingContext = pointsInPath(touches, with: event)
+                
+                   if attribute.instance.colorPanelIsEnable == false {
+                    
+                        drawContextArray.append(newDrawingContext)
+                        save()
+                        self.setNeedsDisplay()
+                   }
+            }
+            
+        }
 
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let newDrawingContext = pointsInPath(touches, with: event)
-        if attribute.instance.colorPanelIsEnable == false {
-            let newTouchEndPoint = TouchEndPoint(context: self.context)
-            newTouchEndPoint.x = newDrawingContext.previousPoint1X
-            newTouchEndPoint.y = newDrawingContext.previousPoint1Y
-            touchEndPointArray.append(newTouchEndPoint)
-            drawContextArray.append(newDrawingContext)
-            save()
-            self.setNeedsDisplay()
+        if let touch = touches.first {
+            
+            if touch.type == UITouchType.stylus {
+        
+                let newDrawingContext = pointsInPath(touches, with: event)
+                if attribute.instance.colorPanelIsEnable == false {
+                    let newTouchEndPoint = TouchEndPoint(context: self.context)
+                    newTouchEndPoint.x = newDrawingContext.previousPoint1X
+                    newTouchEndPoint.y = newDrawingContext.previousPoint1Y
+                    touchEndPointArray.append(newTouchEndPoint)
+                    drawContextArray.append(newDrawingContext)
+                    save()
+                    self.setNeedsDisplay()
+                }
+            }
+            
         }
 
     }
