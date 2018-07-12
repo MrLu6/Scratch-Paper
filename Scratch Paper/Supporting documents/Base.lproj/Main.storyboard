@@ -42,7 +42,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joy-iM-UBe" userLabel="clesar">
-                                                <rect key="frame" x="658" y="17" width="34" height="30"/>
+                                                <rect key="frame" x="603" y="17" width="34" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="clear"/>
                                                 <connections>
@@ -63,6 +63,14 @@
                                                 <state key="normal" title="Redo"/>
                                                 <connections>
                                                     <action selector="reDoButtomPrssed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Mqc-tM-vk8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-g1-JBf">
+                                                <rect key="frame" x="683" y="17" width="38" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="share"/>
+                                                <connections>
+                                                    <action selector="shareButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Pgb-0v-W8p"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -254,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2S-QA-9kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264" y="265"/>
+            <point key="canvasLocation" x="-442" y="168"/>
         </scene>
     </scenes>
     <resources>

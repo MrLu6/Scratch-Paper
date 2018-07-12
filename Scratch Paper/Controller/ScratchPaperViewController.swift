@@ -133,6 +133,19 @@ class ScratchPaperViewController:UIViewController {
     }
   
   
+    @IBAction func shareButtonPressed(_ sender: UIButton) {
+        
+        let currentDrawContextImage = paperView.asImage()
+        
+        let activityVC = UIActivityViewController(activityItems: [currentDrawContextImage], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = paperView
+        self.present(activityVC, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+    
     func numBrushChange() {
         
         attribute.instance.numBrush = Int16(brushSlider.value)

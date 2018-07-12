@@ -379,3 +379,15 @@ class ScratchPaperView: UIView {
     
 }
 
+extension ScratchPaperView {
+    
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+        return renderer.image { _ in
+            self.drawHierarchy(in: CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height), afterScreenUpdates: false)
+        }
+    }
+    
+}
+
+
