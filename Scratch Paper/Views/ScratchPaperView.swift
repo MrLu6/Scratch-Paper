@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ScratchPaperView: UIView {
+class ScratchPaperView: UIView{
     
     var drawContextArray  = [DrawContext]()
     var undoRedoContextStack = [DrawContext]()
@@ -33,14 +33,20 @@ class ScratchPaperView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if let touch = touches.first{
+           
+            let superView = self.superview as! UIScrollView
+            superView.isScrollEnabled = true
+            
             
             if touch.type == UITouchType.stylus {
+                superView.isScrollEnabled = false
             
                 previousPoint1 = touch.location(in: self)
                 let newTouchBeginPoint = TouchBeginPoint(context:self.context)
                 newTouchBeginPoint.x = Float ((previousPoint1?.x)!)
                 newTouchBeginPoint.y = Float((previousPoint1?.y)!)
                 touchBeginPointArray.append(newTouchBeginPoint)
+                print("BeginPoint \(newTouchBeginPoint)")
                 save()
             }
             
@@ -75,8 +81,11 @@ class ScratchPaperView: UIView {
         
         if let touch = touches.first {
             
+            let superView = self.superview as! UIScrollView
+            superView.isScrollEnabled = false
+            
             if touch.type == UITouchType.stylus {
-        
+                
                 let newDrawingContext = pointsInPath(touches, with: event)
                 if attribute.instance.colorPanelIsEnable == false {
                     let newTouchEndPoint = TouchEndPoint(context: self.context)
@@ -245,6 +254,8 @@ class ScratchPaperView: UIView {
         if !drawContextArray.isEmpty && !touchBeginPointArray.isEmpty {
             
             var currentContext = drawContextArray.removeLast()
+            
+            
             var currentPoint = (currentContext.previousPoint1X,currentContext.previousPoint1Y)
             
            
@@ -391,7 +402,9 @@ class ScratchPaperView: UIView {
     }
     
 
-    
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
 }
 
 extension ScratchPaperView {

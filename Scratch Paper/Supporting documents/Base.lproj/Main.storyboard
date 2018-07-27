@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,78 +14,79 @@
         <scene sceneID="03z-PB-Yvl">
             <objects>
                 <viewController id="YmL-4e-dk1" customClass="ScratchPaperViewController" customModule="Scratch_Paper" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ayM-0H-XQR">
+                    <view key="view" contentMode="scaleToFill" id="ayM-0H-XQR" customClass="rootView" customModule="Scratch_Paper" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Ga-Db-ezF" userLabel="FirstViewStack">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdu-zN-Bhr" userLabel="ToolBar View" customClass="ToolBarView" customModule="Scratch_Paper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdu-zN-Bhr" userLabel="ToolBar View" customClass="ToolBarView" customModule="Scratch_Paper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="64"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-LA-11j" userLabel="pen">
-                                                <rect key="frame" x="155" y="-4" width="72" height="72"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="Icon-App-72x72"/>
-                                                <connections>
-                                                    <action selector="penButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="BsF-u7-Ox3"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G82-67-VYb" userLabel="eraser">
-                                                <rect key="frame" x="430" y="7" width="50" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="eraser"/>
-                                                <connections>
-                                                    <action selector="eraserButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="f3X-ks-EOO"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joy-iM-UBe" userLabel="clesar">
-                                                <rect key="frame" x="603" y="17" width="34" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="clear"/>
-                                                <connections>
-                                                    <action selector="clearButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="M01-hN-bLj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DK-TY-XWk">
-                                                <rect key="frame" x="279" y="17" width="38" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Undo"/>
-                                                <connections>
-                                                    <action selector="unDoButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="4oz-AW-lGN"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzu-dk-X70">
-                                                <rect key="frame" x="353" y="17" width="36" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Redo"/>
-                                                <connections>
-                                                    <action selector="reDoButtomPrssed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Mqc-tM-vk8"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-g1-JBf">
-                                                <rect key="frame" x="683" y="17" width="38" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="share"/>
-                                                <connections>
-                                                    <action selector="shareButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Pgb-0v-W8p"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.94754986470000002" green="0.96993559600000001" blue="0.94128751460000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpe-ck-Hog" userLabel="Draw View" customClass="ScratchPaperView" customModule="Scratch_Paper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G82-67-VYb" userLabel="eraser">
+                                        <rect key="frame" x="430" y="7" width="50" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="eraser"/>
+                                        <connections>
+                                            <action selector="eraserButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="f3X-ks-EOO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joy-iM-UBe" userLabel="clesar">
+                                        <rect key="frame" x="603" y="17" width="34" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="clear"/>
+                                        <connections>
+                                            <action selector="clearButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="M01-hN-bLj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DK-TY-XWk">
+                                        <rect key="frame" x="279" y="17" width="38" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Undo"/>
+                                        <connections>
+                                            <action selector="unDoButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="4oz-AW-lGN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzu-dk-X70">
+                                        <rect key="frame" x="353" y="17" width="36" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Redo"/>
+                                        <connections>
+                                            <action selector="reDoButtomPrssed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Mqc-tM-vk8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-g1-JBf">
+                                        <rect key="frame" x="683" y="17" width="38" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="share"/>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="Pgb-0v-W8p"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-LA-11j" userLabel="pen">
+                                        <rect key="frame" x="155" y="7" width="72" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="Icon-App-72x72"/>
+                                        <connections>
+                                            <action selector="penButtomPressed:" destination="YmL-4e-dk1" eventType="touchUpInside" id="BsF-u7-Ox3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94754986470000002" green="0.96993559600000001" blue="0.94128751460000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-Va-5Rb" userLabel="scrollView" customClass="scrollView" customModule="Scratch_Paper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVQ-r9-ncG" userLabel="drawView" customClass="ScratchPaperView" customModule="Scratch_Paper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="jpe-ck-Hog" firstAttribute="height" secondItem="tdu-zN-Bhr" secondAttribute="height" multiplier="15:1" id="7Np-JI-m1W"/>
-                                </constraints>
-                            </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUF-vp-BNI" userLabel="ColorBrushOpcityPanel" customClass="ColorBrushOpcityPanel" customModule="Scratch_Paper" customModuleProvider="target">
+                            </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZUF-vp-BNI" userLabel="ColorBrushOpcityPanel" customClass="ColorBrushOpcityPanel" customModule="Scratch_Paper" customModuleProvider="target">
                                 <rect key="frame" x="140" y="90" width="360" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="promot" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sur-AO-hRg" userLabel="panelPicture">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="180"/>
@@ -233,21 +233,9 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="360" id="jrJ-cP-qnC"/>
-                                    <constraint firstAttribute="height" constant="180" id="oBb-UL-wT5"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="2Ga-Db-ezF" secondAttribute="bottom" id="DKC-Sk-B8j"/>
-                            <constraint firstItem="2Ga-Db-ezF" firstAttribute="leading" secondItem="ayM-0H-XQR" secondAttribute="leading" id="Gcw-ob-0Vn"/>
-                            <constraint firstAttribute="trailing" secondItem="2Ga-Db-ezF" secondAttribute="trailing" id="WpS-uh-inz"/>
-                            <constraint firstItem="2Ga-Db-ezF" firstAttribute="top" secondItem="ayM-0H-XQR" secondAttribute="top" id="Xjs-he-BqG"/>
-                            <constraint firstItem="ZUF-vp-BNI" firstAttribute="top" secondItem="ayM-0H-XQR" secondAttribute="top" constant="90" id="nZH-S3-qJp"/>
-                            <constraint firstItem="ZUF-vp-BNI" firstAttribute="leading" secondItem="ayM-0H-XQR" secondAttribute="leading" constant="140" id="u1A-vP-BPL"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kHw-cu-AfY"/>
                     </view>
                     <connections>
@@ -256,13 +244,14 @@
                         <outlet property="OpacityLabel" destination="Djw-Ot-BEZ" id="Jx2-8b-Zr4"/>
                         <outlet property="brushSlider" destination="7D9-Wi-OJL" id="2qV-LR-cK5"/>
                         <outlet property="opacitySlider" destination="62W-wE-8dc" id="JMO-5z-dvK"/>
-                        <outlet property="paperView" destination="jpe-ck-Hog" id="NMe-4H-hG0"/>
+                        <outlet property="paperView" destination="yVQ-r9-ncG" id="a9I-hi-uzJ"/>
+                        <outlet property="scroller" destination="eKV-Va-5Rb" id="n26-Zh-7Xa"/>
                         <outlet property="toolBarView" destination="tdu-zN-Bhr" id="RAL-BC-gE7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2S-QA-9kZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442" y="168"/>
+            <point key="canvasLocation" x="-442.1875" y="167.578125"/>
         </scene>
     </scenes>
     <resources>

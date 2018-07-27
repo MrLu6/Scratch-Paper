@@ -12,6 +12,12 @@ import UIKit
 
 class ScratchPaperViewController:UIViewController {
 
+    
+    
+    
+    
+    @IBOutlet weak var scroller: UIScrollView!
+    
     @IBOutlet weak var paperView: ScratchPaperView!
     
     @IBOutlet weak var toolBarView: UIView!
@@ -45,17 +51,36 @@ class ScratchPaperViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
+        
+        
+    
         ColorBrushOpcityPanel.isHidden = true
+        paperView.frame.size.height = paperView.frame.height * 3
+        
+        scroller.contentSize.height = 2000
+        
+        
         paperView.loadDrawingContext()
         paperView.loadTochBeginPoint()
         paperView.loadTochEndPoint()
         paperView.resetDrawContextBeforeTerminated()
+       
+        
+        scroller.isScrollEnabled = false
+        
+       
+       
        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+   
     
     
     
@@ -178,4 +203,6 @@ class ScratchPaperViewController:UIViewController {
     
 
 }
+
+
 
